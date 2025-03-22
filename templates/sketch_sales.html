@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sketch Sales</title>
+</head>
+<body>
+    <h1>Sketch Sales</h1>
+    <form action="/admin/sketch_sales" method="post" enctype="multipart/form-data">
+        <label for="sketch_image">Sketch Image:</label>
+        <input type="file" id="sketch_image" name="sketch_image" required>
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" step="0.01" required>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+        <button type="submit">Add Sketch Sale</button>
+    </form>
+    <h2>Existing Sketch Sales</h2>
+    <ul>
+        {% for sale in sketch_sales %}
+        <li>
+            <img src="{{ sale.sketch_image }}" alt="Sketch Image" width="100">
+            <p>{{ sale.description }}</p>
+            <p>${{ sale.price }}</p>
+            <form action="/admin/sketch_sales/{{ sale.id }}" method="post">
+                <input type="hidden" name="method" value="delete"> <!-- Rename _method to method -->
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
