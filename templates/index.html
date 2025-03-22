@@ -3,11 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Home - Artist Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>{{ result_home.message }}</h1>
-    <p>Welcome to the Artist Portfolio!</p>
+<body class="bg-gray-100">
+    <header class="bg-blue-600 text-white py-4">
+        <div class="container mx-auto text-center">
+            <h1 class="text-3xl font-bold">Welcome to the Artist Portfolio</h1>
+        </div>
+    </header>
+
+    <main class="container mx-auto py-8">
+        <!-- Section for Sketch Sales -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Sketch Sales</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {% for sale in sketch_sales %}
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="{{ sale.sketch_image }}" alt="Sketch Image" class="h-48 w-full object-cover">
+                    <div class="p-4">
+                        <p class="text-lg font-semibold text-gray-800">${{ sale.price }}</p>
+                        <p class="text-sm text-gray-600">{{ sale.description }}</p>
+                        {% if sale.is_sold %}
+                        <span class="inline-block mt-2 px-3 py-1 text-xs font-semibold text-white bg-red-500 rounded">Sold</span>
+                        {% else %}
+                        <span class="inline-block mt-2 px-3 py-1 text-xs font-semibold text-white bg-green-500 rounded">Available</span>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- Section for Image Sketches -->
+        <section>
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Image Sketches</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {% for sketch in image_sketches %}
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="{{ sketch.photo_image }}" alt="Photo Image" class="h-48 w-full object-cover">
+                    <img src="{{ sketch.sketch_image }}" alt="Sketch Image" class="h-48 w-full object-cover mt-2">
+                    <div class="p-4">
+                        <p class="text-sm text-gray-600">{{ sketch.description }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-4">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2023 Artist Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>

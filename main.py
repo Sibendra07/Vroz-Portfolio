@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI, Request, Form, HTTPException, status, Depends, UploadFile, File
 from fastapi.responses import HTMLResponse, RedirectResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
@@ -9,6 +10,20 @@ import shutil
 import uuid
 
 app = FastAPI()
+
+# Ensure required folders exist
+def ensure_folders():
+    required_folders = [
+        "static",
+        "uploads",
+        "uploads/sketch_sales",
+        "uploads/image_sketches"
+    ]
+    for folder in required_folders:
+        os.makedirs(folder, exist_ok=True)
+
+# Call the function to ensure folders are created
+ensure_folders()
 
 # Mount static and upload folders
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -54,11 +69,14 @@ class ImageSketch(Base):
 Base.metadata.create_all(bind=engine)
 
 @app.get("/", response_class=HTMLResponse)
-def read_root(request: Request):
-    result_home = {
-        "message": "Welcome to the Artist Portfolio!",
-    }
-    return templates.TemplateResponse("index.html", {"request": request, "result_home": result_home})
+def read_root(request: Request, db: Session = Depends(get_db)):
+    sketch_sales = db.query(SketchSale).all()
+    image_sketches = db.query(ImageSketch).all()
+    return templates.TemplateResponse(
+        "index.html",
+        {"request": request, "sketch_sales": sketch_sales, "image_sketches": image_sketches},
+    )
+
 @app.get("/admin", response_class=HTMLResponse)
 def read_admin(request: Request, db: Session = Depends(get_db)):
     # Check if the user is logged in
