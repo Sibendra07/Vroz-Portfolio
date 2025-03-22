@@ -8,8 +8,12 @@ from sqlalchemy.ext.declarative import DeclarativeMeta, declarative_base
 from sqlalchemy.orm import sessionmaker, Session, declarative_base
 import shutil
 import uuid
+from dotenv import load_dotenv
 
 app = FastAPI()
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Ensure required folders exist
 def ensure_folders():
@@ -32,11 +36,11 @@ app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 # Set up Jinja2 templates
 templates = Jinja2Templates(directory="templates")
 
-# Hardcoded admin password
-ADMIN_PASSWORD = "admin123"
+# Get sensitive data from environment variables
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "default_password")
+SQLALCHEMY_DATABASE_URL = os.getenv("SQLALCHEMY_DATABASE_URL", "sqlite:///./default.db")
 
 # Database setup
-SQLALCHEMY_DATABASE_URL = "sqlite:///./test.db"
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base: DeclarativeMeta = declarative_base()
