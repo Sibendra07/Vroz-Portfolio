@@ -39,9 +39,9 @@
     <!-- Header Section -->
     <header class="bg-primary-600 text-white shadow-md">
         {% block header %}
-        <nav class="container mx-auto px-4 py-6">
-            <div class="flex justify-between items-center">
-                <div class="text-2xl font-bold">
+        <nav class="container mx-auto px-4 py-6 ">
+            <div class="flex justify-between items-center mr-10">
+                <div class="text-2xl font-bold ml-8">
                     <a href="index.html" class="flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -60,11 +60,11 @@
                 </div>
                 
                 <!-- Desktop Navigation -->
-                <ul class="hidden md:flex space-x-6 text-lg">
+                <ul class="hidden md:flex space-x-6 text-xl">
                     <li><a href="/" class="hover:text-primary-200 transition-colors">Home</a></li>
-                    <li><a href="/my-work" class="hover:text-primary-200 transition-colors">My art</a></li>
+                    <li><a href="/portfolio" class="hover:text-primary-200 transition-colors">Portfolio</a></li>
                     <li><a href="/products" class="hover:text-primary-200 transition-colors">Product</a></li>
-                    <li><a href="contact.html" class="hover:text-primary-200 transition-colors">Contact</a></li>
+                    <!-- <li><a href="contact.html" class="hover:text-primary-200 transition-colors">Contact</a></li> -->
                 </ul>
             </div>
             
@@ -82,7 +82,7 @@
     </header>
     
     <!-- Main Content Section -->
-    <main class="container mx-auto px-4 py-8 flex-grow">
+    <main>
         {% block content %}
         <!-- Child pages will replace this block with their content -->
         {% endblock %}

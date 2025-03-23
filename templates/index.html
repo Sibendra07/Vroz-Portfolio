@@ -4,19 +4,50 @@
 
 {% block content %}
     <!-- Section for Sketch Sales -->
+    <section class="relative w-full h-screen bg-gray-900">
+        <div class="w-full h-full overflow-hidden">
+            <img src="static/images/vroz.jpg" alt="Background Image" class="w-full h-full object-cover scale-110 opacity-85 transition-all duration-500 hover:scale-125 hover:opacity-100">
+        </div>
+        
+        <div class="absolute inset-0 bg-black opacity-70"></div>
+
+        <div class="absolute inset-0 flex items-center justify-center text-white px-6 md:px-12">
+            <div class="text-center space-y-8">
+                <h1 class="text-4xl sm:text-6xl font-extrabold text-shadow-lg tracking-wide leading-tight">Vroz - The Artist</h1>
+                <p class="text-lg sm:text-xl opacity-90 max-w-lg mx-auto">Get this beautiful sketch for a limited time only. Don't miss out on this exclusive offer!</p>
+                <a href="/portfolio" class="inline-block mt-8 py-3 px-10 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105">
+                    Portfolio
+                </a>
+                <a href="/products">
+                    <button class="mt-4 py-3 md:ml-4 px-10 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105">
+                        Buy Now
+                    </button>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <section class="mb-12">
-        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Sketch Sales</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Sketch Sales</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             {% for sale in sketch_sales %}
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="{{ sale.sketch_image }}" alt="Sketch Image" class="h-48 w-full object-cover">
-                <div class="p-4">
-                    <p class="text-lg font-semibold text-gray-800">${{ sale.price }}</p>
-                    <p class="text-sm text-gray-600">{{ sale.description }}</p>
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+                <!-- Image -->
+                <img src="{{ sale.sketch_image }}" alt="Sketch Image" class="h-64 w-full object-cover">
+                
+                <!-- Content -->
+                <div class="p-4 space-y-2">
+                    <!-- Price -->
+                    <p class="text-xl font-semibold text-gray-900">${{ sale.price }}</p>
+                    
+                    <!-- Description -->
+                    <p class="text-sm text-gray-700 line-clamp-2">{{ sale.description }}</p>
+                    
+                    <!-- Status Badge -->
                     {% if sale.is_sold %}
-                    <span class="inline-block mt-2 px-3 py-1 text-xs font-semibold text-white bg-red-500 rounded">Sold</span>
+                    <span class="inline-block px-3 py-1 text-xs font-semibold text-white bg-red-500 rounded-full">Sold</span>
                     {% else %}
-                    <span class="inline-block mt-2 px-3 py-1 text-xs font-semibold text-white bg-green-500 rounded">Available</span>
+                    <span class="inline-block px-3 py-1 text-xs font-semibold text-white bg-green-500 rounded-full">Available</span>
                     {% endif %}
                 </div>
             </div>
@@ -25,7 +56,7 @@
     </section>
 
     <!-- Section for Image Sketches -->
-    <section>
+    <section class="mb-4">
         <h2 class="text-2xl font-semibold text-gray-800 mb-4">Image Sketches</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {% for sketch in image_sketches %}
@@ -39,4 +70,5 @@
             {% endfor %}
         </div>
     </section>
+
 {% endblock %}

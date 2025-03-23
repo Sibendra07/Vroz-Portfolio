@@ -6,7 +6,7 @@
         <!-- Main Canvas with A4 Aspect Ratio (1:1.414) -->
         <div id="mainImageContainer" class="relative max-w-[300px] w-full mx-auto" style="aspect-ratio: 1 / 1.414;">
 
-            <div class="relative">
+                <div class="">
                 {% if products %}
                     <img id="mainImage" 
                         src="{{ products[0].imageUrl }}" 
@@ -16,26 +16,21 @@
                 {% else %}
                     <p class="text-center text-gray-500">No products available.</p>
                 {% endif %}
-            </div>
+                </div>
 
-            <!-- Navigation Arrows Positioned Outside the Image Canvas -->
-            <div class="absolute inset-0 flex justify-between items-center px-6">
-                <!-- Previous Button -->
+                <!-- Navigation Arrows -->
                 <button id="prevBtn" 
-                        class="bg-black/50 text-white p-4 rounded-full z-10 hover:bg-black/75 transition transform -translate-x-[150%] lg:-translate-x-[200%]">
+                        class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10 hover:bg-black/75 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                     </svg>
                 </button>
-
-                <!-- Next Button -->
                 <button id="nextBtn" 
-                        class="bg-black/50 text-white p-4 rounded-full z-10 hover:bg-black/75 transition transform translate-x-[150%] lg:translate-x-[200%]">
+                        class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10 hover:bg-black/75 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
                 </button>
-            </div>
         </div>
 
         <!-- Product Details -->

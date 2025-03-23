@@ -104,7 +104,7 @@ def products(request: Request, db: Session = Depends(get_db)):
         {"request": request, "products": products},
     )
 
-@app.get("/my-work", response_class=HTMLResponse)
+@app.get("/portfolio", response_class=HTMLResponse)
 def read_root(request: Request, db: Session = Depends(get_db)):
     image_sketches = db.query(ImageSketch).all()
     return templates.TemplateResponse(
