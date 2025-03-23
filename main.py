@@ -84,12 +84,26 @@ def read_root(request: Request, db: Session = Depends(get_db)):
         {"request": request, "sketch_sales": sketch_sales, "image_sketches": image_sketches},
     )
 @app.get("/products", response_class=HTMLResponse)
-def read_root(request: Request, db: Session = Depends(get_db)):
+def products(request: Request, db: Session = Depends(get_db)):
+    # Query all sketch sales
     sketch_sales = db.query(SketchSale).all()
+    
+    # Convert to a list of dictionaries
+    products = [
+        {
+            "id": sale.id,
+            "imageUrl": sale.sketch_image,
+            "name": sale.description,
+            "price": f"${sale.price:.2f}",
+        }
+        for sale in sketch_sales
+    ]
+    
     return templates.TemplateResponse(
         "products.html",
-        {"request": request, "sketch_sales": sketch_sales},
+        {"request": request, "products": products},
     )
+
 @app.get("/my-work", response_class=HTMLResponse)
 def read_root(request: Request, db: Session = Depends(get_db)):
     image_sketches = db.query(ImageSketch).all()
