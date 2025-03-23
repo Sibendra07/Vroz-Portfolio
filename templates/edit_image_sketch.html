@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Image Sketch</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <h1>Edit Image Sketch</h1>
+    <form action="/admin/image_sketches/{{ image_sketch.id }}/edit" method="post">
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required>{{ image_sketch.description }}</textarea>
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>

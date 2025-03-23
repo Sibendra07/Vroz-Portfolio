@@ -9,6 +9,9 @@ from sqlalchemy.orm import sessionmaker, Session, declarative_base
 import shutil
 import uuid
 from dotenv import load_dotenv
+from fastapi.exceptions import RequestValidationError
+from starlette.exceptions import HTTPException as StarletteHTTPException
+from starlette.responses import RedirectResponse
 
 app = FastAPI()
 
@@ -80,6 +83,21 @@ def read_root(request: Request, db: Session = Depends(get_db)):
         "index.html",
         {"request": request, "sketch_sales": sketch_sales, "image_sketches": image_sketches},
     )
+@app.get("/products", response_class=HTMLResponse)
+def read_root(request: Request, db: Session = Depends(get_db)):
+    sketch_sales = db.query(SketchSale).all()
+    return templates.TemplateResponse(
+        "products.html",
+        {"request": request, "sketch_sales": sketch_sales},
+    )
+@app.get("/my-work", response_class=HTMLResponse)
+def read_root(request: Request, db: Session = Depends(get_db)):
+    image_sketches = db.query(ImageSketch).all()
+    return templates.TemplateResponse(
+        "my_work.html",
+        {"request": request,"image_sketches": image_sketches},
+    )
+
 
 @app.get("/admin", response_class=HTMLResponse)
 def read_admin(request: Request, db: Session = Depends(get_db)):
@@ -157,6 +175,33 @@ def delete_sketch_sale(
     db.commit()
     return RedirectResponse(url="/admin", status_code=status.HTTP_303_SEE_OTHER)
 
+@app.get("/admin/sketch_sales/{sketch_sale_id}/edit", response_class=HTMLResponse)
+def edit_sketch_sale_form(sketch_sale_id: int, request: Request, db: Session = Depends(get_db)):
+    sketch_sale = db.query(SketchSale).filter(SketchSale.id == sketch_sale_id).first()
+    if not sketch_sale:
+        raise HTTPException(status_code=404, detail="Sketch Sale not found")
+    return templates.TemplateResponse(
+        "edit_sketch_sale.html",
+        {"request": request, "sketch_sale": sketch_sale},
+    )
+
+@app.post("/admin/sketch_sales/{sketch_sale_id}/edit", response_class=HTMLResponse)
+def update_sketch_sale(
+    sketch_sale_id: int,
+    price: float = Form(...),
+    description: str = Form(...),
+    is_sold: bool = Form(False),
+    db: Session = Depends(get_db)
+):
+    sketch_sale = db.query(SketchSale).filter(SketchSale.id == sketch_sale_id).first()
+    if not sketch_sale:
+        raise HTTPException(status_code=404, detail="Sketch Sale not found")
+    sketch_sale.price = price
+    sketch_sale.description = description
+    sketch_sale.is_sold = is_sold
+    db.commit()
+    return RedirectResponse(url="/admin", status_code=status.HTTP_303_SEE_OTHER)
+
 # Routes for ImageSketch
 @app.post("/admin/image_sketches", response_class=HTMLResponse)
 def create_image_sketch(
@@ -200,6 +245,39 @@ def delete_image_sketch(
     db.delete(image_sketch)
     db.commit()
     return RedirectResponse(url="/admin", status_code=status.HTTP_303_SEE_OTHER)
+
+@app.get("/admin/image_sketches/{image_sketch_id}/edit", response_class=HTMLResponse)
+def edit_image_sketch_form(image_sketch_id: int, request: Request, db: Session = Depends(get_db)):
+    image_sketch = db.query(ImageSketch).filter(ImageSketch.id == image_sketch_id).first()
+    if not image_sketch:
+        raise HTTPException(status_code=404, detail="Image Sketch not found")
+    return templates.TemplateResponse(
+        "edit_image_sketch.html",
+        {"request": request, "image_sketch": image_sketch},
+    )
+
+@app.post("/admin/image_sketches/{image_sketch_id}/edit", response_class=HTMLResponse)
+def update_image_sketch(
+    image_sketch_id: int,
+    description: str = Form(...),
+    db: Session = Depends(get_db)
+):
+    image_sketch = db.query(ImageSketch).filter(ImageSketch.id == image_sketch_id).first()
+    if not image_sketch:
+        raise HTTPException(status_code=404, detail="Image Sketch not found")
+    image_sketch.description = description
+    db.commit()
+    return RedirectResponse(url="/admin", status_code=status.HTTP_303_SEE_OTHER)
+
+@app.exception_handler(StarletteHTTPException)
+async def custom_404_handler(request: Request, exc: StarletteHTTPException):
+    if exc.status_code == 404:
+        return templates.TemplateResponse("404.html", {"request": request}, status_code=404)
+    return RedirectResponse(url="/")
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    return templates.TemplateResponse("404.html", {"request": request}, status_code=404)
 
 if __name__ == "__main__":
     import uvicorn

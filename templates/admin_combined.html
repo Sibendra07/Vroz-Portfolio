@@ -29,10 +29,11 @@
             <img src="{{ sale.sketch_image }}" alt="Sketch Image" width="100">
             <p>{{ sale.description }}</p>
             <p>${{ sale.price }}</p>
-            <form action="/admin/sketch_sales/{{ sale.id }}" method="post">
+            <form action="/admin/sketch_sales/{{ sale.id }}" method="post" style="display: inline;">
                 <input type="hidden" name="method" value="delete">
                 <button type="submit">Delete</button>
             </form>
+            <a href="/admin/sketch_sales/{{ sale.id }}/edit" class="button">Edit</a>
         </li>
         {% endfor %}
     </ul>
@@ -54,10 +55,11 @@
             <img src="{{ sketch.photo_image }}" alt="Photo Image" width="100">
             <img src="{{ sketch.sketch_image }}" alt="Sketch Image" width="100">
             <p>{{ sketch.description }}</p>
-            <form action="/admin/image_sketches/{{ sketch.id }}" method="post">
+            <form action="/admin/image_sketches/{{ sketch.id }}" method="post" style="display: inline;">
                 <input type="hidden" name="method" value="delete">
                 <button type="submit">Delete</button>
             </form>
+            <a href="/admin/image_sketches/{{ sketch.id }}/edit" class="button">Edit</a>
         </li>
         {% endfor %}
     </ul>

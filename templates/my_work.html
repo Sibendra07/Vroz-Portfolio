@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}My Work{% endblock %}
+
+{% block content %}
+<main class="container mx-auto py-8">
+    <!-- Section for Image Sketches -->
+    <section>
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Image Sketches</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {% for sketch in image_sketches %}
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="{{ sketch.photo_image }}" alt="Photo Image" class="h-48 w-full object-cover">
+                <img src="{{ sketch.sketch_image }}" alt="Sketch Image" class="h-48 w-full object-cover mt-2">
+                <div class="p-4">
+                    <p class="text-sm text-gray-600">{{ sketch.description }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+{% endblock %}

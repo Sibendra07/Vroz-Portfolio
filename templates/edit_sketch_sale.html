@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Sketch Sale</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <h1>Edit Sketch Sale</h1>
+    <form action="/admin/sketch_sales/{{ sketch_sale.id }}/edit" method="post">
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" step="0.01" value="{{ sketch_sale.price }}" required>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required>{{ sketch_sale.description }}</textarea>
+        <label for="is_sold">Is Sold:</label>
+        <input type="checkbox" id="is_sold" name="is_sold" {% if sketch_sale.is_sold %}checked{% endif %}>
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>
