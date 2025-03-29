@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/admin.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-8">Admin Dashboard</h1>
+
+    <!-- Tabs -->
+    <div class="border-b border-gray-200 mb-8">
+        <nav class="-mb-px flex space-x-8">
+            <button id="sketch-sales-tab" class="border-blue-500 text-blue-600 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                Sketch Sales
+            </button>
+            <button id="image-sketches-tab" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                Image Sketches
+            </button>
+        </nav>
+    </div>
+
+    <!-- Sketch Sales Section -->
+    <div id="sketch-sales-section">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-semibold">Sketch Sales</h2>
+            <button onclick="openSketchSaleModal()" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition duration-300">
+                Add New Sketch Sale
+            </button>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Image</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200" id="sketch-sales-table">
+                    {% for sale in sketch_sales %}
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <img src="{{ sale.sketch_image }}" alt="{{ sale.description }}" class="h-12 w-12 object-cover rounded">
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-gray-900">{{ sale.description }}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-gray-900">${{ "%.2f"|format(sale.price) }}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ 'bg-green-100 text-green-800' if not sale.is_sold else 'bg-red-100 text-red-800' }}">
+                                {{ 'Available' if not sale.is_sold else 'Sold' }}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <a href="/admin/sketch_sales/{{ sale.id }}/edit" class="text-blue-600 hover:text-blue-900 mr-3">Edit</a>
+                            <form action="/admin/sketch_sales/{{ sale.id }}" method="post" class="inline">
+                                <input type="hidden" name="method" value="delete">
+                                <button type="submit" class="text-red-600 hover:text-red-900">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Image Sketches Section (hidden by default) -->
+    <div id="image-sketches-section" class="hidden">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-semibold">Image Sketches</h2>
+            <button onclick="openImageSketchModal()" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition duration-300">
+                Add New Image Sketch
+            </button>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Photo</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sketch</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200" id="image-sketches-table">
+                    {% for sketch in image_sketches %}
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <img src="{{ sketch.photo_image }}" alt="{{ sketch.description }}" class="h-12 w-12 object-cover rounded">
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <img src="{{ sketch.sketch_image }}" alt="{{ sketch.description }}" class="h-12 w-12 object-cover rounded">
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="text-sm text-gray-900">{{ sketch.description }}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <a href="/admin/image_sketches/{{ sketch.id }}/edit" class="text-blue-600 hover:text-blue-900 mr-3">Edit</a>
+                            <form action="/admin/image_sketches/{{ sketch.id }}" method="post" class="inline">
+                                <input type="hidden" name="method" value="delete">
+                                <button type="submit" class="text-red-600 hover:text-red-900">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modals -->
+{% include "modals/sketch_sale_modal.html" %}
+{% include "modals/image_sketch_modal.html" %}
+
+<script>
+    // Pass data from Jinja to JavaScript
+    const sketchSalesData = {{ sketch_sales_json | safe }};
+    const imageSketchesData = {{ image_sketches_json | safe }};
+</script>
+{% endblock %}

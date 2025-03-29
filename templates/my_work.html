@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Portfolio - Art Portfolio{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/portfolio.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="bg-white">
+    <div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+        <h1 class="text-3xl font-extrabold tracking-tight text-gray-900 mb-12">My Portfolio</h1>
+
+        <!-- Loading indicator -->
+        <div id="loading-indicator" class="text-center py-8">
+            <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
+            <p class="mt-2 text-gray-600">Loading portfolio items...</p>
+        </div>
+
+        <!-- Portfolio container -->
+        <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8" 
+             id="portfolio-container" style="display: none;">
+            <!-- Portfolio items will be loaded here via JavaScript -->
+        </div>
+
+        <!-- Empty state -->
+        <div id="empty-state" class="text-center py-8" style="display: none;">
+            <p class="text-gray-500">No portfolio items available at the moment.</p>
+        </div>
+
+        <!-- Pagination -->
+        <div class="mt-12 flex justify-center" id="pagination-container" style="display: none;">
+            <nav class="flex items-center space-x-4">
+                <button id="prev-page" class="px-4 py-2 border rounded-md text-gray-700 hover:bg-gray-50 disabled:opacity-50" disabled>
+                    Previous
+                </button>
+                <span id="page-info" class="text-gray-700">Page 1 of 1</span>
+                <button id="next-page" class="px-4 py-2 border rounded-md text-gray-700 hover:bg-gray-50 disabled:opacity-50" disabled>
+                    Next
+                </button>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Initialize with empty array if no data is passed
+    const initialPortfolio = {{ image_sketches_json | default('[]') | safe }};
+</script>
+{% endblock %}

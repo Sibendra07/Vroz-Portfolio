@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Art Portfolio{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="/static/css/main.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {% block head %}{% endblock %}
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between">
+                <div class="flex space-x-7">
+                    <a href="/" class="flex items-center py-4 px-2">
+                        <span class="font-semibold text-gray-500 text-lg">Art Portfolio</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="/" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Home</a>
+                    <a href="/products" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Shop</a>
+                    <a href="/portfolio" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Portfolio</a>
+                    {% if request.session.get("is_admin") %}
+                    <a href="/admin" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Admin</a>
+                    <form action="/logout" method="post" class="inline">
+                        <button type="submit" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Logout</button>
+                    </form>
+                    {% else %}
+                    <a href="/admin_login" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Admin Login</a>
+                    {% endif %}
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button class="outline-none mobile-menu-button">
+                        <svg class="w-6 h-6 text-gray-500 hover:text-blue-500"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div class="hidden mobile-menu">
+            <ul class="">
+                <li class="active"><a href="/" class="block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Home</a></li>
+                <li><a href="/products" class="block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Shop</a></li>
+                <li><a href="/portfolio" class="block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Portfolio</a></li>
+                {% if request.session.get("is_admin") %}
+                <li><a href="/admin" class="block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Admin</a></li>
+                <li>
+                    <form action="/logout" method="post" class="block">
+                        <button type="submit" class="w-full text-left block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Logout</button>
+                    </form>
+                </li>
+                {% else %}
+                <li><a href="/admin_login" class="block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Admin Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white shadow-lg mt-12">
+        <div class="max-w-6xl mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <span class="text-gray-500">© 2023 Art Portfolio. All rights reserved.</span>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-blue-500">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-blue-500">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-blue-500">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/js/main.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>
