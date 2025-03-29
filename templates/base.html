@@ -11,30 +11,35 @@
 </head>
 <body class="bg-gray-50">
     <!-- Navigation -->
-    <nav class="bg-white shadow-lg">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="flex justify-between">
-                <div class="flex space-x-7">
-                    <a href="/" class="flex items-center py-4 px-2">
-                        <span class="font-semibold text-gray-500 text-lg">Art Portfolio</span>
+    <nav class="bg-gray-900 shadow-xl fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-center h-20">  <!-- Increased height to 20 (5rem) -->
+                <div class="flex items-center space-x-8">
+                    <a href="/" class="flex items-center">
+                        <span class="text-white font-bold text-xl">Art Portfolio</span>  <!-- Larger text -->
                     </a>
                 </div>
-                <div class="hidden md:flex items-center space-x-1">
-                    <a href="/" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Home</a>
-                    <a href="/products" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Shop</a>
-                    <a href="/portfolio" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Portfolio</a>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-6">  <!-- Increased spacing -->
+                    <a href="/" class="text-gray-300 hover:text-white px-3 py-5 font-medium text-lg transition duration-300">Home</a>
+                    <a href="/products" class="text-gray-300 hover:text-white px-3 py-5 font-medium text-lg transition duration-300">Shop</a>
+                    <a href="/portfolio" class="text-gray-300 hover:text-white px-3 py-5 font-medium text-lg transition duration-300">Portfolio</a>
+                    
                     {% if request.session.get("is_admin") %}
-                    <a href="/admin" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Admin</a>
+                    <a href="/admin" class="text-gray-300 hover:text-white px-3 py-5 font-medium text-lg transition duration-300">Admin</a>
                     <form action="/logout" method="post" class="inline">
-                        <button type="submit" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Logout</button>
+                        <button type="submit" class="text-gray-300 hover:text-white px-3 py-5 font-medium text-lg transition duration-300">Logout</button>
                     </form>
                     {% else %}
-                    <a href="/admin_login" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Admin Login</a>
+                    <a href="/admin_login" class="text-gray-300 hover:text-white px-3 py-5 font-medium text-lg transition duration-300">Admin Login</a>
                     {% endif %}
                 </div>
+                
+                <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center">
-                    <button class="outline-none mobile-menu-button">
-                        <svg class="w-6 h-6 text-gray-500 hover:text-blue-500"
+                    <button class="outline-none mobile-menu-button text-gray-300 hover:text-white">
+                        <svg class="w-8 h-8"  <!-- Larger icon -->
                             fill="none"
                             stroke-linecap="round"
                             stroke-linejoin="round"
@@ -47,21 +52,32 @@
                 </div>
             </div>
         </div>
+        
         <!-- Mobile menu -->
-        <div class="hidden mobile-menu">
-            <ul class="">
-                <li class="active"><a href="/" class="block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Home</a></li>
-                <li><a href="/products" class="block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Shop</a></li>
-                <li><a href="/portfolio" class="block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Portfolio</a></li>
+        <div class="hidden mobile-menu bg-gray-800">  <!-- Darker background for mobile menu -->
+            <ul class="px-2 py-4">
+                <li>
+                    <a href="/" class="block text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-4 text-lg font-medium">Home</a>
+                </li>
+                <li>
+                    <a href="/products" class="block text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-4 text-lg font-medium">Shop</a>
+                </li>
+                <li>
+                    <a href="/portfolio" class="block text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-4 text-lg font-medium">Portfolio</a>
+                </li>
                 {% if request.session.get("is_admin") %}
-                <li><a href="/admin" class="block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Admin</a></li>
+                <li>
+                    <a href="/admin" class="block text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-4 text-lg font-medium">Admin</a>
+                </li>
                 <li>
                     <form action="/logout" method="post" class="block">
-                        <button type="submit" class="w-full text-left block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Logout</button>
+                        <button type="submit" class="w-full text-left text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-4 text-lg font-medium">Logout</button>
                     </form>
                 </li>
                 {% else %}
-                <li><a href="/admin_login" class="block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Admin Login</a></li>
+                <li>
+                    <a href="/admin_login" class="block text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-4 text-lg font-medium">Admin Login</a>
+                </li>
                 {% endif %}
             </ul>
         </div>
