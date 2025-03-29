@@ -1,14 +1,13 @@
 import os
 from typing import List, Optional
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 from fastapi import FastAPI, Request, Form, HTTPException, status, Depends, UploadFile, File, Query
 from fastapi.responses import HTMLResponse, RedirectResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from sqlalchemy import create_engine, Column, String, Float, Boolean, Integer, DateTime
-from sqlalchemy.ext.declarative import DeclarativeMeta, declarative_base
-from sqlalchemy.orm import sessionmaker, Session
+from sqlalchemy.orm import sessionmaker, declarative_base, Session
 import shutil
 import uuid
 import secrets
@@ -23,13 +22,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 import json
 from pathlib import Path
-import imghdr
+from filetype import guess  # Replacement for imghdr
 
 # Load environment variables from .env file
 load_dotenv()
 
 # Get sensitive data from environment variables
-ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "123456")
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "default_password")
 SQLALCHEMY_DATABASE_URL = os.getenv("SQLALCHEMY_DATABASE_URL", "sqlite:///./default.db")
 SECRET_KEY = os.getenv("SECRET_KEY", secrets.token_hex(32))
 
@@ -81,14 +80,14 @@ engine = create_engine(
     connect_args={"check_same_thread": False} if SQLALCHEMY_DATABASE_URL.startswith("sqlite") else {}
 )
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base: DeclarativeMeta = declarative_base()
+Base = declarative_base()
 
 # Pydantic models for validation
 class SketchSaleCreate(BaseModel):
     price: float = Field(..., gt=0)
     description: str = Field(..., min_length=3, max_length=500)
     
-    @validator('price')
+    @field_validator('price')
     def price_must_be_positive(cls, v):
         if v <= 0:
             raise ValueError('Price must be positive')
@@ -99,7 +98,7 @@ class SketchSaleUpdate(BaseModel):
     description: Optional[str] = Field(None, min_length=3, max_length=500)
     is_sold: Optional[bool] = False
     
-    @validator('price')
+    @field_validator('price')
     def price_must_be_positive(cls, v):
         if v is not None and v <= 0:
             raise ValueError('Price must be positive')
@@ -173,19 +172,16 @@ def validate_image_file(file: UploadFile) -> bool:
     if file_ext not in valid_extensions:
         return False
     
-    # Read file content for mime validation (first 2048 bytes should be enough)
+    # Read file content for validation
     file.file.seek(0)
     header = file.file.read(2048)
     file.file.seek(0)  # Reset file pointer
     
-    # Validate with imghdr
-    file_type = imghdr.what(None, header)
-    if not file_type:
+    # Validate with filetype
+    file_type = guess(header)
+    if not file_type or file_type.mime.split('/')[0] != 'image':
         return False
         
-    # Additional size validation if needed
-    # You could implement max file size check here
-    
     return True
 
 def save_upload_file(upload_file: UploadFile, folder: str) -> str:
