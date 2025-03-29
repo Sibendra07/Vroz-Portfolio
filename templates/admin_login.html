@@ -1,50 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login</title>
-    <link rel="stylesheet" href="/static/css/style.css">
-</head>
+{% extends "base.html" %}
 
-<body>
-   <header class="bg-white shadow-md">
-      <div class="container mx-auto px-4 py-4">
-        <div class="flex items-center justify-between">
-          <!-- Website Title / Logo -->
-          <a href="/" class="text-xl font-bold text-gray-800 hover:text-blue-600 transition duration-300">
-            YourWebsite
-          </a>
-          
-          <!-- Navigation Links -->
-          <nav>
-            <ul class="flex space-x-8">
-              <li>
-                <a href="/" class="text-gray-600 hover:text-blue-600 font-medium transition duration-300">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="/products" class="text-gray-600 hover:text-blue-600 font-medium transition duration-300">
-                  Products
-                </a>
-              </li>
-              <li>
-                <a href="/my-work" class="text-gray-600 hover:text-blue-600 font-medium transition duration-300">
-                  My Work
-                </a>
-              </li>
-            </ul>
-          </nav>
+{% block title %}Admin Login{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8">
+        <div>
+            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                Admin Login
+            </h2>
         </div>
-      </div>
-   </header>
+        <form class="mt-8 space-y-6" action="/admin_login" method="POST">
+            <div class="rounded-md shadow-sm -space-y-px">
+                <div>
+                    <label for="password" class="sr-only">Password</label>
+                    <input id="password" name="password" type="password" required
+                        class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                        placeholder="Admin Password">
+                </div>
+            </div>
 
-    <h1>Admin Login</h1>
-    <form action="/admin" method="post">
-        <label for="password">Enter Admin Password:</label>
-        <input type="password" id="password" name="password" required>
-        <button type="submit">Login</button>
-    </form>
-</body>
-</html>
+            <div>
+                <button type="submit"
+                    class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Sign in
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

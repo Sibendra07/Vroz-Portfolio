@@ -1,17 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Image Sketch</title>
-    <link rel="stylesheet" href="/static/css/style.css">
-</head>
-<body>
-    <h1>Edit Image Sketch</h1>
-    <form action="/admin/image_sketches/{{ image_sketch.id }}/edit" method="post">
-        <label for="description">Description:</label>
-        <textarea id="description" name="description" required>{{ image_sketch.description }}</textarea>
-        <button type="submit">Update</button>
+<!-- edit_image_sketch.html -->
+{% extends "base.html" %}
+
+{% block title %}Edit Image Sketch{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-8">Edit Image Sketch</h1>
+    
+    <form action="/admin/image_sketches/{{ image_sketch.id }}/edit" method="post" enctype="multipart/form-data" class="max-w-lg">
+        <div class="mb-4">
+            <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description</label>
+            <textarea id="description" name="description" rows="3"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>{{ image_sketch.description }}</textarea>
+        </div>
+        
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2">Current Photo</label>
+            <img src="{{ image_sketch.photo_image }}" alt="Current photo" class="h-32 w-32 object-cover rounded">
+        </div>
+        
+        <div class="mb-4">
+            <label for="new_photo" class="block text-gray-700 text-sm font-bold mb-2">New Photo (optional)</label>
+            <input type="file" id="new_photo" name="new_photo" accept="image/*"
+                class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+        </div>
+        
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2">Current Sketch</label>
+            <img src="{{ image_sketch.sketch_image }}" alt="Current sketch" class="h-32 w-32 object-cover rounded">
+        </div>
+        
+        <div class="mb-4">
+            <label for="new_sketch" class="block text-gray-700 text-sm font-bold mb-2">New Sketch (optional)</label>
+            <input type="file" id="new_sketch" name="new_sketch" accept="image/*"
+                class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+        </div>
+        
+        <div class="flex items-center justify-between">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                Update Image Sketch
+            </button>
+            <a href="/admin" class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
+                Cancel
+            </a>
+        </div>
     </form>
-</body>
-</html>
+</div>
+{% endblock %}
