@@ -4,17 +4,54 @@
 
 {% block scripts %}
 <script src="/static/js/portfolio.js"></script>
+<style>
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .portfolio-item {
+        animation: fadeIn 0.5s ease-out forwards;
+        opacity: 0;
+    }
+    
+    .portfolio-item:nth-child(1) { animation-delay: 0.1s; }
+    .portfolio-item:nth-child(2) { animation-delay: 0.2s; }
+    .portfolio-item:nth-child(3) { animation-delay: 0.3s; }
+    .portfolio-item:nth-child(4) { animation-delay: 0.4s; }
+    .portfolio-item:nth-child(5) { animation-delay: 0.5s; }
+    .portfolio-item:nth-child(6) { animation-delay: 0.6s; }
+    /* Add more if needed */
+    
+    .toggle-sketch-btn {
+        transition: all 0.3s ease;
+    }
+    
+    .toggle-sketch-btn:hover {
+        transform: scale(1.1);
+        background-color: rgba(75, 85, 99, 0.8);
+    }
+    
+    .pagination-btn {
+        transition: all 0.2s ease;
+    }
+    
+    .pagination-btn:hover:not(:disabled) {
+        background-color: rgba(55, 65, 81, 0.8);
+        transform: translateY(-1px);
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-<div class="bg-white">
+<div class="bg-gray-900 min-h-screen">
     <div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-        <h1 class="text-3xl font-extrabold tracking-tight text-gray-900 mb-12">My Portfolio</h1>
+        <h1 class="text-3xl font-extrabold tracking-tight text-white mb-12">My Portfolio</h1>
 
         <!-- Loading indicator -->
         <div id="loading-indicator" class="text-center py-8">
-            <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
-            <p class="mt-2 text-gray-600">Loading portfolio items...</p>
+            <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-400"></div>
+            <p class="mt-2 text-gray-400">Loading portfolio items...</p>
         </div>
 
         <!-- Portfolio container -->
@@ -25,17 +62,20 @@
 
         <!-- Empty state -->
         <div id="empty-state" class="text-center py-8" style="display: none;">
-            <p class="text-gray-500">No portfolio items available at the moment.</p>
+            <svg class="mx-auto h-12 w-12 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <p class="mt-2 text-gray-400">No portfolio items available at the moment.</p>
         </div>
 
         <!-- Pagination -->
         <div class="mt-12 flex justify-center" id="pagination-container" style="display: none;">
             <nav class="flex items-center space-x-4">
-                <button id="prev-page" class="px-4 py-2 border rounded-md text-gray-700 hover:bg-gray-50 disabled:opacity-50" disabled>
+                <button id="prev-page" class="px-4 py-2 border border-gray-700 rounded-md text-gray-300 hover:text-white pagination-btn disabled:opacity-50" disabled>
                     Previous
                 </button>
-                <span id="page-info" class="text-gray-700">Page 1 of 1</span>
-                <button id="next-page" class="px-4 py-2 border rounded-md text-gray-700 hover:bg-gray-50 disabled:opacity-50" disabled>
+                <span id="page-info" class="text-gray-300">Page 1 of 1</span>
+                <button id="next-page" class="px-4 py-2 border border-gray-700 rounded-md text-gray-300 hover:text-white pagination-btn disabled:opacity-50" disabled>
                     Next
                 </button>
             </nav>
