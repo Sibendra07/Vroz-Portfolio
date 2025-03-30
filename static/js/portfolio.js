@@ -86,7 +86,7 @@ $(document).ready(function() {
         
         const portfolioElements = items.map(item => {
             return `
-                <div class="group relative portfolio-item">
+                <div class="group relative portfolio-item bg-black rounded-md p-4">
                     <div class="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden lg:h-80 lg:aspect-none relative">
                         <!-- Original image (hidden by default) -->
                         <img src="${item.photo_image || '/static/images/placeholder.jpg'}" 
@@ -112,7 +112,7 @@ $(document).ready(function() {
                         </button>
                     </div>
                     <div class="mt-4">
-                        <h3 class="text-sm text-gray-700">${item.description || 'Untitled artwork'}</h3>
+                        <h3 class="text-sm text-white">${item.description || 'Untitled artwork'}</h3>
                     </div>
                 </div>
             `;

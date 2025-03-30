@@ -22,23 +22,23 @@
                 
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-6">  <!-- Increased spacing -->
-                    <a href="/" class="text-gray-300 hover:text-white px-3 py-5 font-medium text-lg transition duration-300">Home</a>
-                    <a href="/products" class="text-gray-300 hover:text-white px-3 py-5 font-medium text-lg transition duration-300">Shop</a>
-                    <a href="/portfolio" class="text-gray-300 hover:text-white px-3 py-5 font-medium text-lg transition duration-300">Portfolio</a>
+                    <a href="/" class="text-gray-100 hover:text-white px-3 py-5 font-medium text-lg transition duration-300">Home</a>
+                    <a href="/products" class="text-gray-100 hover:text-white px-3 py-5 font-medium text-lg transition duration-300">Shop</a>
+                    <a href="/portfolio" class="text-gray-100 hover:text-white px-3 py-5 font-medium text-lg transition duration-300">Portfolio</a>
                     
                     {% if request.session.get("is_admin") %}
-                    <a href="/admin" class="text-gray-300 hover:text-white px-3 py-5 font-medium text-lg transition duration-300">Admin</a>
+                    <a href="/admin" class="text-gray-100 hover:text-white px-3 py-5 font-medium text-lg transition duration-300">Admin</a>
                     <form action="/logout" method="post" class="inline">
-                        <button type="submit" class="text-gray-300 hover:text-white px-3 py-5 font-medium text-lg transition duration-300">Logout</button>
+                        <button type="submit" class="text-gray-100 hover:text-white px-3 py-5 font-medium text-lg transition duration-300">Logout</button>
                     </form>
                     {% else %}
-                    <a href="/admin_login" class="text-gray-300 hover:text-white px-3 py-5 font-medium text-lg transition duration-300">Admin Login</a>
+                    <a href="/admin_login" class="text-gray-100 hover:text-white px-3 py-5 font-medium text-lg transition duration-300">Admin Login</a>
                     {% endif %}
                 </div>
                 
                 <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center">
-                    <button class="outline-none mobile-menu-button text-gray-300 hover:text-white">
+                    <button class="outline-none mobile-menu-button text-gray-100 hover:text-white">
                         <svg class="w-8 h-8"  <!-- Larger icon -->
                             fill="none"
                             stroke-linecap="round"
@@ -57,26 +57,26 @@
         <div class="hidden mobile-menu bg-gray-800">  <!-- Darker background for mobile menu -->
             <ul class="px-2 py-4">
                 <li>
-                    <a href="/" class="block text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-4 text-lg font-medium">Home</a>
+                    <a href="/" class="block text-gray-100 hover:text-white hover:bg-gray-700 px-4 py-4 text-lg font-medium">Home</a>
                 </li>
                 <li>
-                    <a href="/products" class="block text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-4 text-lg font-medium">Shop</a>
+                    <a href="/products" class="block text-gray-100 hover:text-white hover:bg-gray-700 px-4 py-4 text-lg font-medium">Shop</a>
                 </li>
                 <li>
-                    <a href="/portfolio" class="block text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-4 text-lg font-medium">Portfolio</a>
+                    <a href="/portfolio" class="block text-gray-100 hover:text-white hover:bg-gray-700 px-4 py-4 text-lg font-medium">Portfolio</a>
                 </li>
                 {% if request.session.get("is_admin") %}
                 <li>
-                    <a href="/admin" class="block text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-4 text-lg font-medium">Admin</a>
+                    <a href="/admin" class="block text-gray-100 hover:text-white hover:bg-gray-700 px-4 py-4 text-lg font-medium">Admin</a>
                 </li>
                 <li>
                     <form action="/logout" method="post" class="block">
-                        <button type="submit" class="w-full text-left text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-4 text-lg font-medium">Logout</button>
+                        <button type="submit" class="w-full text-left text-gray-100 hover:text-white hover:bg-gray-700 px-4 py-4 text-lg font-medium">Logout</button>
                     </form>
                 </li>
                 {% else %}
                 <li>
-                    <a href="/admin_login" class="block text-gray-300 hover:text-white hover:bg-gray-700 px-4 py-4 text-lg font-medium">Admin Login</a>
+                    <a href="/admin_login" class="block text-gray-100 hover:text-white hover:bg-gray-700 px-4 py-4 text-lg font-medium">Admin Login</a>
                 </li>
                 {% endif %}
             </ul>
@@ -95,22 +95,22 @@
                 <!-- Logo and Copyright -->
                 <div class="flex flex-col">
                     <span class="text-xl font-bold mb-2">ART PORTFOLIO</span>
-                    <span class="text-gray-400 text-sm">© 2025 All rights reserved.</span>
+                    <span class="text-gray-100 text-sm">© 2025 All rights reserved.</span>
                 </div>
                 
                 <!-- Quick Links -->
                 <div class="flex gap-8">
                     <div class="flex flex-col">
                         <span class="font-semibold mb-2">Explore</span>
-                        <a href="#" class="text-gray-400 hover:text-white text-sm mb-1">Gallery</a>
-                        <a href="#" class="text-gray-400 hover:text-white text-sm mb-1">About</a>
-                        <a href="#" class="text-gray-400 hover:text-white text-sm">Contact</a>
+                        <a href="#" class="text-gray-100 hover:text-white text-sm mb-1">Gallery</a>
+                        <a href="#" class="text-gray-100 hover:text-white text-sm mb-1">About</a>
+                        <a href="#" class="text-gray-100 hover:text-white text-sm">Contact</a>
                     </div>
                     <div class="flex flex-col">
                         <span class="font-semibold mb-2">Connect</span>
-                        <a href="#" class="text-gray-400 hover:text-white text-sm mb-1">Facebook</a>
-                        <a href="#" class="text-gray-400 hover:text-white text-sm mb-1">Instagram</a>
-                        <a href="#" class="text-gray-400 hover:text-white text-sm">Twitter</a>
+                        <a href="#" class="text-gray-100 hover:text-white text-sm mb-1">Facebook</a>
+                        <a href="#" class="text-gray-100 hover:text-white text-sm mb-1">Instagram</a>
+                        <a href="#" class="text-gray-100 hover:text-white text-sm">Twitter</a>
                     </div>
                 </div>
                 
