@@ -3,73 +3,118 @@
 {% block title %}Home - Art Portfolio{% endblock %}
 
 {% block content %}
-<div class="py-12 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="lg:text-center">
-            <h2 class="text-base text-blue-600 font-semibold tracking-wide uppercase">Welcome to</h2>
-            <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                My Art Portfolio
+<!-- Full-screen Hero Section -->
+<section class="relative h-screen bg-gray-900 overflow-hidden">
+    <!-- Background Image (Cover) -->
+    <div class="absolute inset-0 z-0">
+        <img src="/static/images/hero-artwork.jpg" alt="Featured Artwork" 
+             class="w-full h-full object-cover opacity-40"
+             loading="eager">
+    </div>
+
+    <!-- Content Container (Centered) -->
+    <div class="relative z-10 h-full flex flex-col justify-center">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
+            <!-- Subheading -->
+            <h2 class="text-lg sm:text-xl font-semibold text-blue-400 tracking-wide uppercase mb-2">
+                Welcome to My Creative World
+            </h2>
+
+            <!-- Main Heading -->
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-tight">
+                Discover <span class="text-blue-400">Unique</span> Artworks
+            </h1>
+
+            <!-- Description -->
+            <p class="mt-6 max-w-2xl mx-auto text-lg sm:text-xl text-gray-300">
+                Explore my collection of original sketches and digital artwork available for purchase.
             </p>
-            <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-                Explore my collection of sketches and artwork available for purchase.
-            </p>
+
+            <!-- CTA Buttons -->
+            <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+                <a href="/products"
+                    class="px-8 py-4 border border-transparent text-lg font-semibold rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-all duration-300 hover:scale-105">
+                    Shop Now
+                </a>
+                <a href="/portfolio"
+                    class="px-8 py-4 border-2 border-white text-lg font-semibold rounded-md text-white bg-transparent hover:bg-white hover:text-gray-900 transition-all duration-300 hover:scale-105">
+                    View Portfolio
+                </a>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- Featured Products -->
-<section class="py-12 bg-gray-50">
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+    </div>
+</section>
+
+<!-- Featured Sketches Section -->
+<section class="py-16 bg-gray-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
-            <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+            <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
                 <span class="block">Featured Sketches</span>
             </h2>
-            <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+            <p class="mt-4 max-w-2xl text-xl text-gray-300 mx-auto">
                 A selection of my latest work available for purchase
             </p>
         </div>
 
         <div class="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
             {% for sale in sketch_sales %}
-            <div class="group">
-                <div class="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
-                    <img src="{{ sale.sketch_image }}" alt="{{ sale.description }}" class="w-full h-full object-center object-cover group-hover:opacity-75">
+            <div class="group bg-gray-700 rounded-lg p-4 hover:bg-gray-600 transition duration-300">
+                <div class="w-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden">
+                    <img src="{{ sale.sketch_image }}" alt="{{ sale.description }}"
+                        class="w-full h-full object-center object-cover group-hover:opacity-90 transition duration-300">
                 </div>
-                <h3 class="mt-4 text-sm text-gray-700">{{ sale.description }}</h3>
-                <p class="mt-1 text-lg font-medium text-gray-900">{{ sale.price }}</p>
-                <a href="/products" class="mt-2 inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition duration-300">
-                    View All
-                </a>
+                <h3 class="mt-4 text-lg text-white">{{ sale.description }}</h3>
+                <p class="mt-1 text-xl font-medium text-blue-400">{{ sale.price }}</p>
             </div>
             {% endfor %}
+        </div>
+        
+        <div class="mt-12 text-center">
+            <a href="/products"
+                class="inline-block px-6 py-3 bg-transparent border-2 border-blue-500 text-blue-400 font-medium rounded-md hover:bg-blue-500 hover:text-white transition duration-300">
+                View All Products
+            </a>
         </div>
     </div>
 </section>
 
-<!-- Portfolio Preview -->
-<section class="py-12 bg-white">
+<!-- Portfolio Preview Section -->
+<section class="py-16 bg-gray-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
-            <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+            <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
                 <span class="block">Recent Work</span>
             </h2>
-            <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+            <p class="mt-4 max-w-2xl text-xl text-gray-300 mx-auto">
                 Browse my portfolio of sketches and artwork
             </p>
         </div>
 
         <div class="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:gap-x-8">
             {% for sketch in image_sketches[:6] %}
-            <div class="group relative">
-                <div class="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
-                    <img src="{{ sketch.sketch_image }}" alt="{{ sketch.description }}" class="w-full h-full object-center object-cover lg:w-full lg:h-full">
+            <div class="group relative bg-gray-800 rounded-lg overflow-hidden hover:bg-gray-700 transition duration-300">
+                <div class="relative h-80 w-full">
+                    <img src="{{ sketch.photo_image }}" alt="Original: {{ sketch.description }}"
+                        class="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-300">
+                    <img src="{{ sketch.sketch_image }}" alt="Sketch: {{ sketch.description }}"
+                        class="absolute inset-0 w-full h-full object-cover object-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 </div>
-                <div class="mt-4 flex justify-between">
-                    <div>
-                        <h3 class="text-sm text-gray-700">
-                            <span aria-hidden="true" class="absolute inset-0"></span>
-                            {{ sketch.description }}
-                        </h3>
+                <div class="p-4">
+                    <h3 class="text-lg font-medium text-white">{{ sketch.description }}</h3>
+                    <div class="mt-2 flex justify-between items-center">
+                        <span class="text-sm text-gray-400">Hover to compare</span>
+                        <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                        </svg>
                     </div>
                 </div>
             </div>
@@ -77,7 +122,8 @@
         </div>
 
         <div class="mt-12 text-center">
-            <a href="/portfolio" class="inline-block px-6 py-3 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition duration-300">
+            <a href="/portfolio"
+                class="inline-block px-6 py-3 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition duration-300">
                 View Full Portfolio
             </a>
         </div>

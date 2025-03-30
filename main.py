@@ -238,8 +238,8 @@ async def products(
     offset = (page - 1) * limit
     
     # Query sketch sales with pagination
-    total = db.query(SketchSale).filter(SketchSale.is_sold == False).count()
-    sketch_sales = db.query(SketchSale).filter(SketchSale.is_sold == False).offset(offset).limit(limit).all()
+    total = db.query(SketchSale).count()
+    sketch_sales = db.query(SketchSale).offset(offset).limit(limit).all()
     
     # Convert to a list of dictionaries
     products = [sale.to_dict() for sale in sketch_sales]
@@ -275,8 +275,8 @@ async def api_products(
     offset = (page - 1) * limit
     
     # Query sketch sales with pagination
-    total = db.query(SketchSale).filter(SketchSale.is_sold == False).count()
-    sketch_sales = db.query(SketchSale).filter(SketchSale.is_sold == False).offset(offset).limit(limit).all()
+    total = db.query(SketchSale).count()
+    sketch_sales = db.query(SketchSale).offset(offset).limit(limit).all()
     
     # Convert to a list of dictionaries
     products = [sale.to_dict() for sale in sketch_sales]
