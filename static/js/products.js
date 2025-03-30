@@ -1,7 +1,7 @@
 $(document).ready(function() {
     // Configuration
     const config = {
-        itemsPerPage: 12,
+        itemsPerPage: 30,
         currentPage: 1,
         totalItems: 0,
         isLoading: false,
@@ -139,49 +139,46 @@ $(document).ready(function() {
         if (isSold) {
             // Template for sold products
             return `
-                <div class="product-card opacity-0 translate-y-4 transition duration-500 transform group">
-                    <div class="relative">
-                        <div class="w-full aspect-w-1 aspect-h-1 bg-gray-900 rounded-lg overflow-hidden">
-                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                                <span class="bg-red-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                                    SOLD
-                                </span>
-                            </div>
-                            <img src="${imageUrl}" 
-                                 alt="${name}"
-                                 class="w-full h-full object-center object-cover grayscale opacity-80"
-                                 loading="lazy"
-                                 onerror="this.src='/static/images/placeholder.jpg'">
+            <div class="product-card opacity-0 translate-y-4 transition duration-500 transform group bg-black rounded-md p-4">
+                <div class="relative">
+                    <div class="w-full aspect-w-1 aspect-h-1 bg-gray-900 rounded-lg overflow-hidden">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                            <span class="bg-red-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                                SOLD
+                            </span>
                         </div>
-                        <div class="mt-4">
-                            <h3 class="text-sm font-medium text-white group-hover:text-gray-300 transition">${name}</h3>
-                        </div>
+                        <img src="${imageUrl}" 
+                             alt="${name}"
+                             class="w-full h-full object-center object-cover grayscale opacity-80"
+                             loading="lazy"
+                             onerror="this.src='/static/images/placeholder.jpg'">
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="text-sm font-medium text-white group-hover:text-gray-300 transition">${name}</h3>
                     </div>
                 </div>
+            </div>
             `;
         } else {
             // Template for available products
             return `
-                <div class="product-card opacity-0 translate-y-4 transition duration-500 transform group">
-                    <div class="relative">
-                        <div class="w-full aspect-w-1 aspect-h-1 bg-gray-900 rounded-lg overflow-hidden">
-                            <img src="${imageUrl}" 
-                                 alt="${name}"
-                                 class="w-full h-full object-center object-cover group-hover:scale-105 transition-transform duration-300"
-                                 loading="lazy"
-                                 onerror="this.src='/static/images/placeholder.jpg'">
+            <div class="product-card opacity-0 translate-y-4 transition duration-500 transform group bg-black rounded-md p-4">
+                <div class="relative">
+                    <div class="w-full aspect-w-1 aspect-h-1 bg-gray-900 rounded-lg overflow-hidden">
+                        <img src="${imageUrl}" 
+                             alt="${name}"
+                             class="w-full h-full object-center object-cover group-hover:scale-105 transition-transform duration-300"
+                             loading="lazy"
+                             onerror="this.src='/static/images/placeholder.jpg'">
+                    </div>
+                    <div class="mt-4 flex justify-between items-center">
+                        <h3 class="text-sm font-medium text-white group-hover:text-gray-300 transition">${name}</h3>
+                        <div class="bg-white text-black px-3 py-1 rounded-full font-bold text-sm">
+                            ${price}
                         </div>
-                        <div class="mt-4 flex justify-between items-center">
-                            <h3 class="text-sm font-medium text-white group-hover:text-gray-300 transition">${name}</h3>
-                            <div class="bg-white text-black px-3 py-1 rounded-full font-bold text-sm">
-                                ${price}
-                            </div>
-                        </div>
-                        <button class="mt-3 w-full bg-white text-black py-2 rounded-md hover:bg-gray-200 transition-colors transform hover:scale-[1.02] active:scale-[0.98] duration-150 font-medium">
-                            Purchase
-                        </button>
                     </div>
                 </div>
+            </div>
             `;
         }
     }
