@@ -8,7 +8,7 @@ class Sketch(BaseModel):
     description: str
     image_url: Optional[str] = None
     video_url: Optional[str] = None
-    sketch_url: str
+    sketch_url: Optional[str] = None
     for_sale: bool = False
     is_sold: bool = True
     price: Optional[float] = 2999.99
