@@ -8,3 +8,4 @@ client = MongoClient(config.MONGODB_URI, server_api=ServerApi('1'))
 
 db = client[config.MONGODB_DB_NAME]
 collection = db[config.MONGODB_COLLECTION_NAME]
+collection_tokens = db["tokens"]

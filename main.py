@@ -2,11 +2,13 @@ from fastapi import FastAPI
 from artist import artist
 from core.logger import logger
 from core.config import config
+from artist.auth import router as auth_router
 
 
 app = FastAPI(debug=config.DEBUG)
 
 app.include_router(artist.router, prefix="/artist", tags=["artist"])
+app.include_router(auth_router)
 
 if __name__ == "__main__":
     import uvicorn
