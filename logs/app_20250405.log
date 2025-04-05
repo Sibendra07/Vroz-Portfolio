@@ -32,3 +32,35 @@
 2025-04-05 10:13:06,070 - python_multipart.multipart - DEBUG - Calling on_end with no data
 2025-04-05 10:13:06,074 - passlib.handlers.bcrypt - DEBUG - detected 'bcrypt' backend, version '4.0.1'
 2025-04-05 10:13:06,074 - passlib.handlers.bcrypt - DEBUG - 'bcrypt' backend lacks $2$ support, enabling workaround
+2025-04-05 17:52:45,260 - passlib.utils.compat - DEBUG - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-04-05 17:52:45,260 - passlib.utils.compat - DEBUG - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-04-05 17:52:45,261 - passlib.utils.compat - DEBUG - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-04-05 17:52:45,268 - passlib.registry - DEBUG - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-04-05 17:52:45,363 - Vroz-Portfolio - INFO - Starting server on 127.0.0.1:8001
+2025-04-05 17:52:45,368 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-04-05 17:53:16,145 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-04-05 17:53:16,145 - python_multipart.multipart - DEBUG - Calling on_field_name with data[0:8]
+2025-04-05 17:53:16,146 - python_multipart.multipart - DEBUG - Calling on_field_data with data[9:14]
+2025-04-05 17:53:16,146 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-04-05 17:53:16,146 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-04-05 17:53:16,146 - python_multipart.multipart - DEBUG - Calling on_field_name with data[15:23]
+2025-04-05 17:53:16,146 - python_multipart.multipart - DEBUG - Calling on_field_data with data[24:39]
+2025-04-05 17:53:16,146 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-04-05 17:53:16,146 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-04-05 17:53:16,154 - passlib.handlers.bcrypt - DEBUG - detected 'bcrypt' backend, version '4.0.1'
+2025-04-05 17:53:16,155 - passlib.handlers.bcrypt - DEBUG - 'bcrypt' backend lacks $2$ support, enabling workaround
+2025-04-05 17:54:14,138 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-04-05 17:54:14,138 - python_multipart.multipart - DEBUG - Calling on_field_name with data[0:8]
+2025-04-05 17:54:14,138 - python_multipart.multipart - DEBUG - Calling on_field_data with data[9:14]
+2025-04-05 17:54:14,138 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-04-05 17:54:14,139 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-04-05 17:54:14,139 - python_multipart.multipart - DEBUG - Calling on_field_name with data[15:23]
+2025-04-05 17:54:14,139 - python_multipart.multipart - DEBUG - Calling on_field_data with data[24:39]
+2025-04-05 17:54:14,139 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-04-05 17:54:14,139 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-04-05 17:54:36,922 - passlib.utils.compat - DEBUG - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-04-05 17:54:36,922 - passlib.utils.compat - DEBUG - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-04-05 17:54:36,922 - passlib.utils.compat - DEBUG - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-04-05 17:54:36,928 - passlib.registry - DEBUG - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-04-05 17:54:37,003 - Vroz-Portfolio - INFO - Starting server on 127.0.0.1:8001
+2025-04-05 17:54:37,007 - asyncio - DEBUG - Using proactor: IocpProactor

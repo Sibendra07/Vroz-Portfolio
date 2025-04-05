@@ -15,5 +15,16 @@ class Config:
     MONGODB_DB_NAME = os.getenv("MONGODB_DB_NAME", "db_name")  # Moved here
     MONGODB_COLLECTION_NAME = os.getenv("MONGODB_COLLECTION_NAME", "collection_name")  # Moved here
 
+    #Authentication settings (Auth Module)
+
+    # JWT settings
+    SECRET_KEY = os.getenv("SECRET_KEY", "cLBXZ1yXcS3qBUqZF9PXn436Kg7kVFpN2xjgi2lz1Qg") # Ensure this is a long, random string in .env
+    ALGORITHM = os.getenv("ALGORITHM", "HS256")
+    ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 60))
+
+    # Admin credentials from environment
+    ADMIN_USERNAME = os.getenv("ADMIN_USERNAME", "admin")
+    ADMIN_PASSWORD_HASH = os.getenv("ADMIN_PASSWORD_HASH", "$2b$12$Hk8mMV4Fj2Lp0p6ofHnycOuBhw30TlQg7v/FZzOtKwI66i7dQN3vS")
+
 # Create an instance of the config
 config = Config()
