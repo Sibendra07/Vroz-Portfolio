@@ -9,6 +9,8 @@ from datetime import datetime
 from core.db import collection
 from artist.schemas import all_sketches_dict, individual_sketch_dict
 from core.logger import logger
+from auth.auth_model import AdminUser
+from core.deps import get_current_admin
 
 
 router = APIRouter()
@@ -119,7 +121,8 @@ async def create_sketch(
     sketch: UploadFile = File(...),  # Making sketch required since sketch_url is required in the model
     for_sale: bool = Form(False),
     is_sold: bool = Form(False),
-    price: float = Form(2999.99)
+    price: float = Form(2999.99),
+    current_admin: AdminUser = Depends(get_current_admin),
 ):
     # Log the request
     logger.info("Creating a new sketch")
@@ -147,8 +150,8 @@ async def create_sketch(
             price=price,
             is_deleted=False,
             deleted_at=None,
-            created_at=datetime.utcnow(),
-            updated_at=datetime.utcnow()
+            created_at=int(datetime.utcnow().timestamp()),
+            updated_at=int(datetime.utcnow().timestamp()),
         )
 
         # Insert into MongoDB
@@ -202,7 +205,7 @@ async def update_sketch(
         
         # Prepare update data
         update_data = {
-            "updated_at": datetime.utcnow()  # Always update the updated_at timestamp
+            "updated_at": int(datetime.utcnow().timestamp())  # Always update the updated_at timestamp
         }
         
         # Update text fields if provided
@@ -286,8 +289,8 @@ async def soft_delete_sketch(sketch_id: str = Path(..., description="The ID of t
             {
                 "$set": {
                     "is_deleted": True,
-                    "deleted_at": datetime.utcnow(),
-                    "updated_at": datetime.utcnow()
+                    "deleted_at": int(datetime.utcnow().timestamp()),
+                    "updated_at": int(datetime.utcnow().timestamp())
                 }
             }
         )
@@ -397,7 +400,7 @@ async def restore_sketch(sketch_id: str = Path(..., description="The ID of the s
                 "$set": {
                     "is_deleted": False,
                     "deleted_at": None,
-                    "updated_at": datetime.utcnow()
+                    "updated_at": int(datetime.utcnow().timestamp())
                 }
             }
         )
