@@ -1,17 +1,21 @@
 import secrets
+from datetime import datetime
 
-# Generate a 32-byte (256-bit) random key, encoded as a URL-safe string
-secret_key = secrets.token_urlsafe(32)
-print(secret_key)
+# # Generate a 32-byte (256-bit) random key, encoded as a URL-safe string
+# secret_key = secrets.token_urlsafe(32)
+# print(secret_key)
 
-from passlib.context import CryptContext
+# from passlib.context import CryptContext
 
-# Create a CryptContext instance (same as in your app)
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+# # Create a CryptContext instance (same as in your app)
+# pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-# Define your admin password
-admin_password = ""  # Change this to your desired password
+# # Define your admin password
+# admin_password = ""  # Change this to your desired password
 
-# Generate the hash
-password_hash = pwd_context.hash(admin_password)
-print(password_hash)
+# # Generate the hash
+# password_hash = pwd_context.hash(admin_password)
+# print(password_hash)
+
+created_at: datetime = datetime.now()
+print(created_at)

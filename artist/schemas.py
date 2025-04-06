@@ -16,5 +16,6 @@ def individual_sketch_dict(sketch):
          "updated_at": sketch["updated_at"]
       }
 
+
 def all_sketches_dict(sketches):
       return [individual_sketch_dict(sketch) for sketch in sketches]

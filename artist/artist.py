@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, UploadFile, File, Form, Depends, Path
-from typing import Optional, List
+from typing import Optional, Union
 import os
 import shutil
 import uuid
@@ -50,6 +50,7 @@ async def get_all_sketches(include_deleted: bool = False, only_deleted: bool = F
 
         # Fetch all sketches from the database
         data = collection.find(query)
+        logger.info(f"Fetched data : {data}")
 
         # Convert the list of sketches into a dictionary format
         all_sketch = all_sketches_dict(data)
@@ -116,8 +117,8 @@ async def get_sketch_by_id(
 async def create_sketch(
     title: str = Form(...),
     description: str = Form(...),
-    image: UploadFile = File(None),
-    video: UploadFile = File(None),
+    image: Optional[Union[UploadFile, str]] = File(None),  # Accept UploadFile or str
+    video: Optional[Union[UploadFile, str]] = File(None), 
     sketch: UploadFile = File(...),  # Making sketch required since sketch_url is required in the model
     for_sale: bool = Form(False),
     is_sold: bool = Form(False),
@@ -150,8 +151,8 @@ async def create_sketch(
             price=price,
             is_deleted=False,
             deleted_at=None,
-            created_at=int(datetime.utcnow().timestamp()),
-            updated_at=int(datetime.utcnow().timestamp()),
+            created_at=datetime.now(),
+            updated_at=datetime.now(),
         )
 
         # Insert into MongoDB
@@ -182,9 +183,9 @@ async def update_sketch(
     sketch_id: str = Path(..., description="The ID of the sketch to update"),
     title: Optional[str] = Form(None),
     description: Optional[str] = Form(None),
-    image: Optional[UploadFile] = File(None),
-    video: Optional[UploadFile] = File(None),
-    sketch: Optional[UploadFile] = File(None),
+    image: Optional[Union[UploadFile, str]] = File(None),  # Accept UploadFile or str
+    video: Optional[Union[UploadFile, str]] = File(None),  # Accept UploadFile or str
+    sketch: Optional[Union[UploadFile, str]] = File(None),  # Accept UploadFile or str
     for_sale: Optional[bool] = Form(None),
     is_sold: Optional[bool] = Form(None),
     price: Optional[float] = Form(None)
@@ -205,7 +206,7 @@ async def update_sketch(
         
         # Prepare update data
         update_data = {
-            "updated_at": int(datetime.utcnow().timestamp())  # Always update the updated_at timestamp
+            "updated_at": datetime.now() # Always update the updated_at timestamp
         }
         
         # Update text fields if provided
@@ -289,8 +290,8 @@ async def soft_delete_sketch(sketch_id: str = Path(..., description="The ID of t
             {
                 "$set": {
                     "is_deleted": True,
-                    "deleted_at": int(datetime.utcnow().timestamp()),
-                    "updated_at": int(datetime.utcnow().timestamp())
+                    "deleted_at": datetime.now(),
+                    "updated_at": datetime.now()
                 }
             }
         )
@@ -337,7 +338,7 @@ async def hard_delete_sketch(sketch_id: str = Path(..., description="The ID of t
         # Optional: Delete associated files
         # This is commented out because you might want to keep files for record purposes
         # If you want to delete files, uncomment this section
-        """
+        
         try:
             # Delete image file if exists
             if sketch.get("image_url"):
@@ -359,7 +360,6 @@ async def hard_delete_sketch(sketch_id: str = Path(..., description="The ID of t
         except Exception as e:
             logger.error(f"Error deleting files: {str(e)}")
             # Continue even if file deletion fails
-        """
         
         logger.info(f"Successfully hard deleted sketch with ID: {sketch_id}")
         return {
@@ -400,7 +400,7 @@ async def restore_sketch(sketch_id: str = Path(..., description="The ID of the s
                 "$set": {
                     "is_deleted": False,
                     "deleted_at": None,
-                    "updated_at": int(datetime.utcnow().timestamp())
+                    "updated_at": datetime.now()
                 }
             }
         )

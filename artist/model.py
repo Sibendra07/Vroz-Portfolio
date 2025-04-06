@@ -6,12 +6,12 @@ from typing import Optional
 class Sketch(BaseModel):
     title: str
     description: str
-    image_url: Optional[str] = None
-    video_url: Optional[str] = None
-    sketch_url: Optional[str] = None
+    image_url: str | None = None
+    video_url: str | None = None
+    sketch_url: str | None = None
     for_sale: bool = False
     is_sold: bool = True
-    price: Optional[float] = 2999.99
+    price: float = 2999.99
     is_deleted: bool = False
-    created_at: int = int(datetime.timestamp(datetime.now()))  
-    updated_at: int = int(datetime.timestamp(datetime.now()))
+    created_at: datetime = datetime.now()
+    updated_at: datetime = datetime.now()

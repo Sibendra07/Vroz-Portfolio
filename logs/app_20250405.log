@@ -1290,3 +1290,5 @@ updated_at
 2025-04-05 18:13:28,332 - python_multipart.multipart - DEBUG - Calling on_end with no data
 2025-04-05 18:13:28,333 - Vroz-Portfolio - INFO - Updating sketch with ID: 67f121483669455525ef8ba1
 2025-04-05 18:13:28,485 - Vroz-Portfolio - INFO - Successfully updated sketch with ID: 67f121483669455525ef8ba1
+2025-04-06 14:16:47,007 - Vroz-Portfolio - INFO - Fetching all sketches from the database (include_deleted=False)
+2025-04-06 14:16:47,053 - Vroz-Portfolio - INFO - Fetched 2 sketches successfully
