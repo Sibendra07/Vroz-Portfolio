@@ -11,7 +11,7 @@ from artist.schemas import all_sketches_dict, individual_sketch_dict
 from core.logger import logger
 from auth.auth_model import AdminUser
 from core.deps import get_current_admin
-from artist.services import get_sketches
+from artist.services import get_sketches, get_sketch
 
 
 router = APIRouter()
@@ -44,7 +44,6 @@ async def get_all_sketches(include_deleted: bool = False, only_deleted: bool = F
         # Prepare query to filter sketches based on deletion status
         all_sketch = get_sketches(only_deleted=only_deleted, include_deleted=include_deleted)
         # Return the list of sketches as a response
-
         response = {
                 "status": 200,
                 "message": "All Sketches Fetched Successfully",
@@ -64,27 +63,7 @@ async def get_sketch_by_id(
     logger.info(f"Fetching sketch with ID: {sketch_id} (include_deleted={include_deleted})")
     
     try:
-        # Validate the ObjectId format
-        if not ObjectId.is_valid(sketch_id):
-            logger.warning(f"Invalid sketch ID format: {sketch_id}")
-            raise HTTPException(status_code=400, detail="Invalid sketch ID format")
-        
-        # Prepare query
-        query = {"_id": ObjectId(sketch_id)}
-        if not include_deleted:
-            query["is_deleted"] = {"$ne": True}
-        
-        # Fetch the sketch from the database
-        sketch = collection.find_one(query)
-        
-        if not sketch:
-            logger.warning(f"Sketch with ID {sketch_id} not found or is deleted")
-            raise HTTPException(status_code=404, detail="Sketch not found")
-        
-        # Convert the sketch document to a dictionary
-        sketch_data = individual_sketch_dict(sketch)
-        
-        logger.info(f"Successfully fetched sketch with ID: {sketch_id}")
+        sketch_data = get_sketch(sketch_id=sketch_id, include_deleted=include_deleted)
         return {
             "status": 200,
             "message": "Sketch Fetched Successfully",

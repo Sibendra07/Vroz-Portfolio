@@ -7,8 +7,12 @@ class Repository:
     def __repr__(self):
         return f"Repository(name={self.name}, url={self.url})"
     
-    def get_sketches(self, query: dict = None):
+    def find_all(self, query: dict = None):
         data = collection.find(query)
+        return data
+    
+    def find_one(self, query: dict = None):
+        data = collection.find_one(query)
         return data
     
 artist_repository = Repository()

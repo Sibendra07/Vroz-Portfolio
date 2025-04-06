@@ -979,3 +979,32 @@
 2025-04-06 15:27:51,843 - passlib.registry - DEBUG - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
 2025-04-06 15:27:51,924 - Vroz-Portfolio - INFO - Starting server on 127.0.0.1:8001
 2025-04-06 15:27:51,929 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-04-06 15:27:54,481 - Vroz-Portfolio - INFO - Fetching all sketches from the database (include_deleted=False only_deleted=False
+2025-04-06 15:27:54,481 - Vroz-Portfolio - INFO - Fetched data : <pymongo.cursor.Cursor object at 0x0000024A1F48FCE0>
+2025-04-06 15:27:54,767 - Vroz-Portfolio - INFO - Fetched 0 sketches successfully
+2025-04-06 15:35:49,568 - passlib.utils.compat - DEBUG - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-04-06 15:35:49,568 - passlib.utils.compat - DEBUG - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-04-06 15:35:49,569 - passlib.utils.compat - DEBUG - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-04-06 15:35:49,573 - passlib.registry - DEBUG - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-04-06 15:35:49,657 - Vroz-Portfolio - INFO - Starting server on 127.0.0.1:8001
+2025-04-06 15:35:49,660 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-04-06 15:35:57,286 - Vroz-Portfolio - INFO - Fetching all sketches from the database (include_deleted=False only_deleted=False
+2025-04-06 15:35:57,286 - Vroz-Portfolio - INFO - Fetched data : <pymongo.cursor.Cursor object at 0x000001EB400BD2B0>
+2025-04-06 15:35:57,577 - Vroz-Portfolio - INFO - Fetched 0 sketches successfully
+2025-04-06 15:39:32,386 - passlib.utils.compat - DEBUG - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-04-06 15:39:32,387 - passlib.utils.compat - DEBUG - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-04-06 15:39:32,387 - passlib.utils.compat - DEBUG - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-04-06 15:39:32,392 - passlib.registry - DEBUG - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-04-06 15:39:32,477 - Vroz-Portfolio - INFO - Starting server on 127.0.0.1:8001
+2025-04-06 15:39:32,479 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-04-06 15:39:37,778 - Vroz-Portfolio - INFO - Fetching all sketches from the database (include_deleted=False only_deleted=False
+2025-04-06 15:39:37,778 - Vroz-Portfolio - INFO - Fetched data : <pymongo.cursor.Cursor object at 0x000002951D8DCA70>
+2025-04-06 15:39:38,092 - Vroz-Portfolio - INFO - Fetched 0 sketches successfully
+2025-04-06 15:39:47,120 - Vroz-Portfolio - INFO - Fetching sketch with ID: sdffgsdffg (include_deleted=False)
+2025-04-06 15:40:11,033 - Vroz-Portfolio - INFO - Fetching sketch with ID: 67f24743381424f4c25344f1 (include_deleted=False)
+2025-04-06 15:42:18,775 - passlib.utils.compat - DEBUG - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-04-06 15:42:18,775 - passlib.utils.compat - DEBUG - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-04-06 15:42:18,775 - passlib.utils.compat - DEBUG - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-04-06 15:42:18,780 - passlib.registry - DEBUG - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-04-06 15:42:18,868 - Vroz-Portfolio - INFO - Starting server on 127.0.0.1:8001
+2025-04-06 15:42:18,872 - asyncio - DEBUG - Using proactor: IocpProactor
