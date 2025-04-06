@@ -944,3 +944,38 @@
 2025-04-06 15:05:03,695 - Vroz-Portfolio - INFO - Sketch created with ID: 67f24743381424f4c25344f1
 2025-04-06 15:05:16,393 - Vroz-Portfolio - INFO - Hard deleting sketch with ID: 67f24743381424f4c25344f1
 2025-04-06 15:05:16,480 - Vroz-Portfolio - INFO - Successfully hard deleted sketch with ID: 67f24743381424f4c25344f1
+2025-04-06 15:20:09,003 - passlib.utils.compat - DEBUG - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-04-06 15:20:09,003 - passlib.utils.compat - DEBUG - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-04-06 15:20:09,004 - passlib.utils.compat - DEBUG - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-04-06 15:20:09,008 - passlib.registry - DEBUG - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-04-06 15:20:09,092 - Vroz-Portfolio - INFO - Starting server on 127.0.0.1:8001
+2025-04-06 15:20:09,095 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-04-06 15:20:18,357 - Vroz-Portfolio - INFO - Fetching all sketches from the database (include_deleted=False only_deleted=False
+2025-04-06 15:20:18,358 - Vroz-Portfolio - INFO - Fetched data : <pymongo.cursor.Cursor object at 0x0000023FC370FD40>
+2025-04-06 15:20:18,643 - Vroz-Portfolio - WARNING - No sketches found in the database
+2025-04-06 15:20:18,643 - Vroz-Portfolio - ERROR - Error fetching sketches: 404: No Sketches Found
+2025-04-06 15:20:18,643 - Vroz-Portfolio - ERROR - Error fetching sketches: 500: Failed while fetching sketches
+2025-04-06 15:21:59,617 - passlib.utils.compat - DEBUG - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-04-06 15:21:59,617 - passlib.utils.compat - DEBUG - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-04-06 15:21:59,617 - passlib.utils.compat - DEBUG - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-04-06 15:21:59,623 - passlib.registry - DEBUG - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-04-06 15:21:59,701 - Vroz-Portfolio - INFO - Starting server on 127.0.0.1:8001
+2025-04-06 15:21:59,705 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-04-06 15:22:08,694 - Vroz-Portfolio - INFO - Fetching all sketches from the database (include_deleted=False only_deleted=False
+2025-04-06 15:22:08,694 - Vroz-Portfolio - INFO - Fetched data : <pymongo.cursor.Cursor object at 0x0000028A61D002F0>
+2025-04-06 15:22:08,985 - Vroz-Portfolio - WARNING - No sketches found in the database
+2025-04-06 15:22:58,501 - passlib.utils.compat - DEBUG - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-04-06 15:22:58,501 - passlib.utils.compat - DEBUG - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-04-06 15:22:58,501 - passlib.utils.compat - DEBUG - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-04-06 15:22:58,508 - passlib.registry - DEBUG - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-04-06 15:22:58,584 - Vroz-Portfolio - INFO - Starting server on 127.0.0.1:8001
+2025-04-06 15:22:58,587 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-04-06 15:23:00,066 - Vroz-Portfolio - INFO - Fetching all sketches from the database (include_deleted=False only_deleted=False
+2025-04-06 15:23:00,066 - Vroz-Portfolio - INFO - Fetched data : <pymongo.cursor.Cursor object at 0x00000160B729C830>
+2025-04-06 15:23:00,371 - Vroz-Portfolio - WARNING - No sketches found in the database
+2025-04-06 15:27:51,837 - passlib.utils.compat - DEBUG - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-04-06 15:27:51,837 - passlib.utils.compat - DEBUG - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-04-06 15:27:51,837 - passlib.utils.compat - DEBUG - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-04-06 15:27:51,843 - passlib.registry - DEBUG - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-04-06 15:27:51,924 - Vroz-Portfolio - INFO - Starting server on 127.0.0.1:8001
+2025-04-06 15:27:51,929 - asyncio - DEBUG - Using proactor: IocpProactor

@@ -11,6 +11,7 @@ from artist.schemas import all_sketches_dict, individual_sketch_dict
 from core.logger import logger
 from auth.auth_model import AdminUser
 from core.deps import get_current_admin
+from artist.services import get_sketches
 
 
 router = APIRouter()
@@ -38,29 +39,12 @@ async def save_upload_file(upload_file: UploadFile, directory: str) -> str:
 
 @router.get("/")
 async def get_all_sketches(include_deleted: bool = False, only_deleted: bool = False):
-    logger.info(f"Fetching all sketches from the database (include_deleted={include_deleted})")
-      
+    
     try:
         # Prepare query to filter sketches based on deletion status
-        query = {}
-        if only_deleted:
-            query["is_deleted"] = True
-        elif not include_deleted:
-            query["is_deleted"] = {"$ne": True}
-
-        # Fetch all sketches from the database
-        data = collection.find(query)
-        logger.info(f"Fetched data : {data}")
-
-        # Convert the list of sketches into a dictionary format
-        all_sketch = all_sketches_dict(data)
-
-        if not all_sketch:
-            logger.warning("No sketches found in the database")
-            raise HTTPException(status_code=404, detail="No Sketches Found")
-
-        logger.info(f"Fetched {len(all_sketch)} sketches successfully")
+        all_sketch = get_sketches(only_deleted=only_deleted, include_deleted=include_deleted)
         # Return the list of sketches as a response
+
         response = {
                 "status": 200,
                 "message": "All Sketches Fetched Successfully",
