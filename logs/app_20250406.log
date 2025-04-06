@@ -1245,3 +1245,26 @@
 2025-04-06 16:47:24,865 - passlib.registry - DEBUG - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
 2025-04-06 16:47:24,954 - Vroz-Portfolio - INFO - Starting server on 127.0.0.1:8001
 2025-04-06 16:47:24,958 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-04-06 16:47:35,524 - Vroz-Portfolio - INFO - Fetching all sketches from the database (include_deleted=False, only_deleted=False, for_sale=False, is_sold=False)
+2025-04-06 16:47:35,524 - Vroz-Portfolio - INFO - Fetched data: <pymongo.cursor.Cursor object at 0x00000239D9643800>
+2025-04-06 16:47:35,873 - Vroz-Portfolio - INFO - Fetched 8 sketches successfully
+2025-04-06 16:48:00,110 - Vroz-Portfolio - INFO - Fetching all sketches from the database (include_deleted=False, only_deleted=False, for_sale=True, is_sold=True)
+2025-04-06 16:48:00,111 - Vroz-Portfolio - INFO - Fetched data: <pymongo.cursor.Cursor object at 0x00000239D9643800>
+2025-04-06 16:48:00,161 - Vroz-Portfolio - INFO - Fetched 2 sketches successfully
+2025-04-06 16:48:13,632 - Vroz-Portfolio - INFO - Fetching sketch with ID: 67f25c8b3a86655da0bd9112 (include_deleted=False)
+2025-04-06 16:48:13,677 - Vroz-Portfolio - INFO - Successfully fetched sketch with ID: 67f25c8b3a86655da0bd9112
+2025-04-06 16:48:20,569 - Vroz-Portfolio - INFO - Fetching all sketches from the database (include_deleted=False, only_deleted=False, for_sale=True, is_sold=False)
+2025-04-06 16:48:20,569 - Vroz-Portfolio - INFO - Fetched data: <pymongo.cursor.Cursor object at 0x00000239D9674410>
+2025-04-06 16:48:20,615 - Vroz-Portfolio - INFO - Fetched 4 sketches successfully
+2025-04-06 16:48:41,807 - Vroz-Portfolio - INFO - Fetching all sketches from the database (include_deleted=False, only_deleted=False, for_sale=True, is_sold=True)
+2025-04-06 16:48:41,807 - Vroz-Portfolio - INFO - Fetched data: <pymongo.cursor.Cursor object at 0x00000239D9643800>
+2025-04-06 16:48:41,853 - Vroz-Portfolio - INFO - Fetched 2 sketches successfully
+2025-04-06 16:48:48,527 - Vroz-Portfolio - INFO - Fetching all sketches from the database (include_deleted=False, only_deleted=False, for_sale=True, is_sold=False)
+2025-04-06 16:48:48,527 - Vroz-Portfolio - INFO - Fetched data: <pymongo.cursor.Cursor object at 0x00000239D9643800>
+2025-04-06 16:48:48,577 - Vroz-Portfolio - INFO - Fetched 4 sketches successfully
+2025-04-06 16:49:02,633 - Vroz-Portfolio - INFO - Fetching all sketches from the database (include_deleted=False, only_deleted=False, for_sale=False, is_sold=False)
+2025-04-06 16:49:02,634 - Vroz-Portfolio - INFO - Fetched data: <pymongo.cursor.Cursor object at 0x00000239D9674AA0>
+2025-04-06 16:49:02,684 - Vroz-Portfolio - INFO - Fetched 8 sketches successfully
+2025-04-06 16:49:19,181 - Vroz-Portfolio - INFO - Fetching all sketches from the database (include_deleted=True, only_deleted=False, for_sale=False, is_sold=False)
+2025-04-06 16:49:19,181 - Vroz-Portfolio - INFO - Fetched data: <pymongo.cursor.Cursor object at 0x00000239D9677680>
+2025-04-06 16:49:19,240 - Vroz-Portfolio - INFO - Fetched 8 sketches successfully
