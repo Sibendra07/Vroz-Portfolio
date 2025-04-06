@@ -38,7 +38,7 @@ async def save_upload_file(upload_file: UploadFile, directory: str) -> str:
     return f"/uploads/{directory}/{filename}"
 
 @router.get("/")
-async def get_all_sketches(include_deleted: bool = False, only_deleted: bool = False):
+async def get_all_sketches(include_deleted: bool = False, only_deleted: bool = False, for_sale: bool = False, is_sold: bool = False):
     
     try:
         # Prepare query to filter sketches based on deletion status
@@ -55,26 +55,6 @@ async def get_all_sketches(include_deleted: bool = False, only_deleted: bool = F
         logger.error(f"Error fetching sketches: {str(e)}")
         raise HTTPException(status_code=500, detail="Some Error has occurred, Please Try Again Later")
 
-@router.get("/{sketch_id}")
-async def get_sketch_by_id(
-    sketch_id: str = Path(..., description="The ID of the sketch to retrieve"),
-    include_deleted: bool = False
-):
-    logger.info(f"Fetching sketch with ID: {sketch_id} (include_deleted={include_deleted})")
-    
-    try:
-        sketch_data = get_sketch(sketch_id=sketch_id, include_deleted=include_deleted)
-        return {
-            "status": 200,
-            "message": "Sketch Fetched Successfully",
-            "sketch": sketch_data
-        }
-    
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Error fetching sketch: {str(e)}")
-        raise HTTPException(status_code=500, detail="An error occurred, please try again later")
 
 @router.post("/")
 async def create_sketch(
@@ -382,4 +362,106 @@ async def restore_sketch(sketch_id: str = Path(..., description="The ID of the s
         raise
     except Exception as e:
         logger.error(f"Error restoring sketch: {str(e)}")
+        raise HTTPException(status_code=500, detail="An error occurred, please try again later")
+    
+
+
+
+# 1. Get all sketches that are for sale, but not sold (not deleted)
+@router.get("/sketches-for-sale-not-sold")
+async def get_sketches_for_sale_not_sold():
+    try:
+        all_sketch = get_sketches(for_sale=True, is_sold=False)  # Non-deleted by default
+        response = {
+            "status": 200,
+            "message": "Sketches For Sale (Not Sold) Fetched Successfully",
+            "sketches": all_sketch
+        }
+        return response
+    except Exception as e:
+        logger.error(f"Error fetching sketches for sale not sold: {str(e)}")
+        raise HTTPException(status_code=500, detail="Some Error has occurred, Please Try Again Later")
+
+# 2. Get all sketches that are for sale and already sold (not deleted)
+@router.get("/sketches-for-sale-sold")
+async def get_sketches_for_sale_sold():
+    try:
+        all_sketch = get_sketches(for_sale=True, is_sold=True)  # Non-deleted by default
+        response = {
+            "status": 200,
+            "message": "Sketches For Sale and Sold Fetched Successfully",
+            "sketches": all_sketch
+        }
+        return response
+    except Exception as e:
+        logger.error(f"Error fetching sketches for sale and sold: {str(e)}")
+        raise HTTPException(status_code=500, detail="Some Error has occurred, Please Try Again Later")
+
+# 3. Get all sketches that are not for sale (sold can be True or False, not deleted)
+@router.get("/sketches-not-for-sale")
+async def get_sketches_not_for_sale():
+    try:
+        all_sketch = get_sketches(for_sale=False)  # Non-deleted by default, no is_sold filter
+        response = {
+            "status": 200,
+            "message": "Sketches Not For Sale Fetched Successfully",
+            "sketches": all_sketch
+        }
+        return response
+    except Exception as e:
+        logger.error(f"Error fetching sketches not for sale: {str(e)}")
+        raise HTTPException(status_code=500, detail="Some Error has occurred, Please Try Again Later")
+
+# --- Regardless of Deleted and Sold ---
+
+# 1. Get all sketches for sale (regardless of deleted and sold)
+@router.get("/all-sketches-for-sale")
+async def get_all_sketches_for_sale():
+    try:
+        all_sketch = get_sketches(for_sale=True, include_deleted=True)  # Include deleted, no is_sold filter
+        response = {
+            "status": 200,
+            "message": "All Sketches For Sale Fetched Successfully",
+            "sketches": all_sketch
+        }
+        return response
+    except Exception as e:
+        logger.error(f"Error fetching all sketches for sale: {str(e)}")
+        raise HTTPException(status_code=500, detail="Some Error has occurred, Please Try Again Later")
+
+# 2. Get all sketches not for sale (regardless of deleted and sold)
+@router.get("/all-sketches-not-for-sale")
+async def get_all_sketches_not_for_sale():
+    try:
+        all_sketch = get_sketches(for_sale=False, include_deleted=True)  # Include deleted, no is_sold filter
+        response = {
+            "status": 200,
+            "message": "All Sketches Not For Sale Fetched Successfully",
+            "sketches": all_sketch
+        }
+        return response
+    except Exception as e:
+        logger.error(f"Error fetching all sketches not for sale: {str(e)}")
+        raise HTTPException(status_code=500, detail="Some Error has occurred, Please Try Again Later")
+    
+
+@router.get("/{sketch_id}")
+async def get_sketch_by_id(
+    sketch_id: str = Path(..., description="The ID of the sketch to retrieve"),
+    include_deleted: bool = False
+):
+    logger.info(f"Fetching sketch with ID: {sketch_id} (include_deleted={include_deleted})")
+    
+    try:
+        sketch_data = get_sketch(sketch_id=sketch_id, include_deleted=include_deleted)
+        return {
+            "status": 200,
+            "message": "Sketch Fetched Successfully",
+            "sketch": sketch_data
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error fetching sketch: {str(e)}")
         raise HTTPException(status_code=500, detail="An error occurred, please try again later")
